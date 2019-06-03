@@ -1,7 +1,7 @@
 # nodejs-cli
 
 1.Download nodejs-cli
-2.Do npm init
+2.Do npm install
 3. From nodejs-cli command prompt do node app.js
 Using CLI
    From nodejs-cli command prompt do node commands.js add
