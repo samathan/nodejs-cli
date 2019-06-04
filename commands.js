@@ -1,6 +1,5 @@
 const program = require('commander');
 const { prompt } = require('inquirer');
-var moment = require('moment');
 var request = require('request');
 var http = require('http');
 
