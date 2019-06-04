@@ -1,6 +1,5 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var moment = require("moment");
 
 var app = express();
 
@@ -14,30 +13,35 @@ function findBirthday(req, res, next) {
     var firstname = req.params.firstname;
     var lastname = req.params.lastname;
     var birthdate = req.params.birthdate
-
-
     findAndWish(firstname, birthdate);
-
 }
 
 function findAndWish(firstname, dob) {
 
-    var splitdob = dob.split('-');
-    var month = splitdob[0];
-    var day = splitdob[1];
-    var d = new Date();
-    d.setMonth(month);
-    d.setDate(day);
+    let splitdob = dob.split('-');
+    let month = splitdob[0];
+    let day = splitdob[1];
+    birthdayMonth = parseInt(month);
+    birthdayDay = parseInt(day);
 
-    let birthday = moment(d);
-    let today = moment();
+    today = new Date();
+    birthday = new Date();
 
-    if (birthday.isSame(today)) {
-        console.log('Hello' + firstname + '.Happy Birthday');;
-    } else {
-        console.log('Hello' + firstname + '.You have' + birthday.diff(today, 'days') + 'days until your birtdate');
+    birthday.setMonth(birthdayMonth - 1);
+    birthday.setDate(birthdayDay);
+    if (today > birthday) {
+
+        birthday.setYear(today.getFullYear() + 1);
     }
 
+    diff = Math.abs(birthday.getTime() - today.getTime());
+    diff = Math.floor(diff / (1000 * 60 * 60 * 24));
+    if (diff == 0) {
+        console.log('Hello ' + firstname + '.Happy Birthday');;
+    }
+    else {
+        console.log('Hello ' + firstname + '.You have ' + diff + ' days until your birtdate');
+    }
 
 }
 
